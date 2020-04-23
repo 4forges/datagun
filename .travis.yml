@@ -1,5 +1,4 @@
 language: ruby
-bundler_args: --jobs=2
 cache: bundler
 
 rvm:
