@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = spec.description
   spec.description   = 'A Ruby interface to the Datagun API.'
-  spec.homepage      = 'https://bitbucket.org/4forges/datagun/src/master/'
+  spec.homepage      = 'https://github.com/4forges/datagun'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
 
