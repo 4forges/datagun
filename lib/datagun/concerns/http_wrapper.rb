@@ -1,33 +1,34 @@
 # frozen_string_literal: true
 
+require 'rest-client'
+require 'json'
 #
-# Decorator class for the HTTParty, mainly used to add the headers with authorization
+# Decorator class for the RestClient, mainly used to add the headers with authorization
 #
 class HttpWrapper
-  attr_accessor :url, :query, :body
+  attr_accessor :payload
+  attr_writer :endpoint
 
-  def initialize(url:)
-    @url = url
-    @payload = {}
-    @payload[:headers] = {
+  def initialize(base_url:)
+    @base_url = base_url
+    @headers = {
       'Authorization': Datagun.config.api_key
     }
-    @payload[:query] = query
-    @payload[:body] = body if body.present?
   end
 
   def post
-    HTTParty.post(url, payload)
+    JSON.parse(RestClient.post(url, payload, @headers).body)
+  rescue StandardError => e
+    { data: { error: e.message } }
   end
 
   def get
-    HTTParty.get(url, payload)
+    JSON.parse(RestClient.get(url, { Authorization: Datagun.config.api_key, params: payload }).body)
+  rescue StandardError => e
+    { data: { error: e.message } }
   end
 
-  private
-
-  def payload
-    @payload[:query] = query if query.present?
-    @payload[:body] = body if body.present?
+  def url
+    "#{@base_url}/#{@endpoint}"
   end
 end

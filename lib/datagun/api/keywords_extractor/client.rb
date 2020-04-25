@@ -7,42 +7,75 @@ module Datagun
     #
     module KeywordsExtractor
       #
-      # Client provide an HttpWrapper object that let
+      # Client provides methods to interact with keywords_extractor endpoint
       #
-      class Client < Datagun::Base
-
-        def initialize(default_logger: nil)
-          @client = HttpWrapper.new(url: )
-          super(default_logger: default_logger)
+      class Client < Base
+        def initialize(default_logger: nil, version: Datagun.config.api_version)
+          base_url = "#{API_URL}/#{version}/keyword_extractor"
+          @client = HttpWrapper.new(base_url: base_url)
+          super(default_logger: default_logger, version: version)
         end
-        #
-        # <Description>
-        #
-        # @param [<Type>] file <description>
-        # @param [<Type>] name <description>
-        #
-        # @return [<Type>] <description>
-        #
-        def save_model(file:, name:); end
 
         #
-        # <Description>
+        # Store your corpus file
         #
-        # @param [<Type>] model_id <description>
+        # @param [String] name: model name
+        # @param [Integer] features: max number of features to extract from the corpus
+        # @param [File] file
         #
-        # @return [<Type>] <description>
+        # @return [JSON]
         #
-        def status(model_id:); end
+        def save_model(name:, features: nil, file:)
+          client.endpoint = 'save_model'
+          client.payload = {
+            model_name: name,
+            max_features: features,
+            csv: file
+          }
+          client.post
+        end
 
         #
-        # <Description>
+        # Get status for a model_id
         #
-        # @param [<Type>] model_id <description>
-        # @param [<Type>] text <description>
+        # @param [String] model_id
         #
-        # @return [<Type>] <description>
+        # @return [JSON]
         #
-        def analyze(model_id:, text:); end
+        def status(model_id:)
+          client.endpoint = 'status'
+          client.payload = {
+            model_id: model_id
+          }
+          client.get
+        end
+
+        #
+        # Return the list of keywords extractors models
+        #
+        # @return [JSON]
+        #
+        def models
+          client.endpoint = 'models'
+          client.get
+        end
+
+        #
+        # Extract top keywords from passed text using your model
+        #
+        # @param [String] model_id
+        # @param [String] text
+        #
+        # @return [JSON]
+        #
+        def analyze(model_id:, text:)
+          client.endpoint = 'analyze'
+          client.payload = {
+            model_id: model_id,
+            text: text
+          }
+          client.get
+        end
       end
     end
   end

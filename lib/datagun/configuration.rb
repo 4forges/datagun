@@ -9,7 +9,7 @@ module Datagun
 
   class Configuration
     OPTIONAL_ATTRS = [].freeze
-    MANDATORY_ATTRS = %i[api_key].freeze
+    MANDATORY_ATTRS = %i[api_key api_version].freeze
 
     attr_accessor(*MANDATORY_ATTRS)
 

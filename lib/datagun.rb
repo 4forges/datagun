@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
+require 'logger'
+
 require 'datagun/version'
 require 'datagun/configuration'
+require 'datagun/concerns/http_wrapper'
+
+require 'datagun/api/base'
+require 'datagun/api/keywords_extractor/client'
 
 module Datagun
   class Error < StandardError; end
