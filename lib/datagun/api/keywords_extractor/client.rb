@@ -11,9 +11,9 @@ module Datagun
       #
       class Client < Base
         def initialize(default_logger: nil, version: Datagun.config.api_version)
-          base_url = "#{API_URL}/#{version}/keyword_extractor"
-          @client = HttpWrapper.new(base_url: base_url)
           super(default_logger: default_logger, version: version)
+          base_url = "#{@api_url}/api/#{@version}/keyword_extractor"
+          @client = HttpWrapper.new(base_url: base_url)
         end
 
         #
@@ -29,9 +29,9 @@ module Datagun
           client.endpoint = 'save_model'
           client.payload = {
             model_name: name,
-            max_features: features,
-            csv: file
+            file: file
           }
+          client.payload[:max_features] = features unless features.nil?
           client.post
         end
 
@@ -58,6 +58,16 @@ module Datagun
         def models
           client.endpoint = 'models'
           client.get
+        end
+
+        #
+        # Delete a model
+        #
+        # @return [JSON]
+        #
+        def delete(model_id:)
+          client.endpoint = model_id
+          client.delete
         end
 
         #

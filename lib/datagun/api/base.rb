@@ -8,7 +8,6 @@ module Datagun
     class Base
       attr_reader :client, :logger
 
-      API_URL = 'http://localhost:4000/api'
       #
       # Initialize Datagun::Base
       #
@@ -17,6 +16,7 @@ module Datagun
       #
       def initialize(default_logger: nil, version:)
         @logger = default_logger || self.class.set_logger
+        @api_url = Datagun.config.api_url || 'https://api.datagun.ai'
         @version = version
       end
 

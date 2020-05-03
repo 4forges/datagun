@@ -28,6 +28,12 @@ class HttpWrapper
     { data: { error: e.message } }
   end
 
+  def delete
+    JSON.parse(RestClient.delete(url, { Authorization: Datagun.config.api_key }).body)
+  rescue StandardError => e
+    { data: { error: e.message } }
+  end
+
   def url
     "#{@base_url}/#{@endpoint}"
   end

@@ -8,9 +8,10 @@ module Datagun
   #
 
   class Configuration
-    OPTIONAL_ATTRS = [].freeze
+    OPTIONAL_ATTRS = %i[api_url].freeze
     MANDATORY_ATTRS = %i[api_key api_version].freeze
 
+    attr_accessor(*OPTIONAL_ATTRS)
     attr_accessor(*MANDATORY_ATTRS)
 
     MANDATORY_ATTRS.each do |attr|
