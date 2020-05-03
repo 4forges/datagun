@@ -32,7 +32,7 @@ module Datagun
             file: file
           }
           client.payload[:max_features] = features unless features.nil?
-          client.post
+          client.post.transform_keys(&:to_sym)
         end
 
         #
@@ -47,7 +47,7 @@ module Datagun
           client.payload = {
             model_id: model_id
           }
-          client.get
+          client.get.transform_keys(&:to_sym)
         end
 
         #
@@ -57,7 +57,7 @@ module Datagun
         #
         def models
           client.endpoint = 'models'
-          client.get
+          client.get.map { |item| item.transform_keys(&:to_sym) }
         end
 
         #
@@ -67,7 +67,7 @@ module Datagun
         #
         def delete(model_id:)
           client.endpoint = model_id
-          client.delete
+          client.delete.transform_keys(&:to_sym)
         end
 
         #
@@ -84,7 +84,7 @@ module Datagun
             model_id: model_id,
             text: text
           }
-          client.get
+          client.get.transform_keys(&:to_sym)
         end
       end
     end

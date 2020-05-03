@@ -21,7 +21,7 @@ module Datagun
           client.payload = {
             url: url
           }
-          client.get
+          client.get.transform_keys(&:to_sym)
         end
       end
     end
