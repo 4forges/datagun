@@ -17,21 +17,21 @@ class HttpWrapper
   end
 
   def post
-    JSON.parse(RestClient.post(url, payload, @headers).body)
+    JSON.parse(RestClient.post(url, payload, @headers).body)['data']
   rescue StandardError => e
-    { data: { error: e.message } }
+    { error: e.message }
   end
 
   def get
-    JSON.parse(RestClient.get(url, { Authorization: Datagun.config.api_key, params: payload }).body)
+    JSON.parse(RestClient.get(url, { Authorization: Datagun.config.api_key, params: payload }).body)['data']
   rescue StandardError => e
-    { data: { error: e.message } }
+    { error: e.message }
   end
 
   def delete
-    JSON.parse(RestClient.delete(url, { Authorization: Datagun.config.api_key }).body)
+    JSON.parse(RestClient.delete(url, { Authorization: Datagun.config.api_key }).body)['data']
   rescue StandardError => e
-    { data: { error: e.message } }
+    { error: e.message }
   end
 
   def url
