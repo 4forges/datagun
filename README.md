@@ -26,17 +26,17 @@ Or install it yourself as:
 
 ```ruby
   Datagun.configure do |config|
-    config.api_key = 'b0135a41ef32e93f1aaae4c0b6f5a887ad01dd6a0a2155583e4e4d98fcca2d6d0f84b92d5dd252e2f3653582703f809be30bc1b5be4a6f983e3a1188eff75378'
+    config.api_key = 'token'
     config.api_version = 'v1'
     config.api_url = 'http://localhost:6000'
   end
 
   client = Datagun::Api::KeywordsExtractor::Client.new
-  client.save_model(name: 'italiano11', file: File.open('/Users/giovannelli/Desktop/models/it.csv'))
+  client.save_model(name: 'italian', file: File.open('/Users/giovannelli/Desktop/models/it.csv'))
   client.models
-  client.status(model_id: "d905ea2f-136a-45b3-b80d-002dce388d3d")
-  client.delete(model_id: "9b7a3fd5-4b75-4b61-9099-ee5ab15eb835")
-  client.analyze(text: "lorem ispum dolor sic amet", model_id: "9b7a3fd5-4b75-4b61-9099-ee5ab15eb835")
+  client.status(model_id: "model id")
+  client.delete(model_id: "model id")
+  client.analyze(text: "lorem ispum dolor sic amet", model_id: "model id")
 ```
 
 ## Development
