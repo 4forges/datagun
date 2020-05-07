@@ -2,9 +2,7 @@
 
 [![Build Status](https://travis-ci.org/4forges/datagun.svg?branch=master)](https://travis-ci.org/4forges/datagun)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/datagun`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A Ruby interface to the Datagun API.
 
 ## Installation
 
@@ -28,22 +26,55 @@ Or install it yourself as:
   Datagun.configure do |config|
     config.api_key = 'token'
     config.api_version = 'v1'
-    config.api_url = 'http://localhost:6000'
   end
+```
 
+### Top keywords
+
+Define a client and you gen upload your corpus. You can list your models, check a single model status, delete a model and analyze your text.
+
+```ruby
   client = Datagun::Api::KeywordsExtractor::Client.new
+
   client.save_model(name: 'italian', file: File.open('/Users/giovannelli/Desktop/models/it.csv'))
+  # list models
   client.models
+
+  # Get model status
+  # model statuse: processin, ready, failed
   client.status(model_id: "model id")
+
+  # Delete a model
   client.delete(model_id: "model id")
+
+  # analyze your text getting keywords with scores
   client.analyze(text: "lorem ispum dolor sic amet", model_id: "model id")
 ```
 
-## Development
+### Community Detection
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Define a client call detect
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+  client = Datagun::Api::KeywordsExtractor::Client.new
+
+  # Return a list of communities
+  client.detect(graph: 'json')
+```
+
+### Image hash
+
+Define a client and call perceptual
+
+```ruby
+  client = Datagun::Api::KeywordsExtractor::Client.new
+
+  # Return a list of communities
+  client.perceptual(url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ruby_logo.svg/360px-Ruby_logo.svg.png')
+```
+
+# TODO
+- Add tests to all clients methods
 
 ## Contributing
 

@@ -21,7 +21,7 @@ module Datagun
           client.payload = {
             graph: graph
           }
-          client.post.transform_keys(&:to_sym)
+          client.post.map{transform_keys(&:to_sym)
         end
       end
     end
