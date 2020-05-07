@@ -35,7 +35,8 @@ module Datagun
                     end
 
         # Debug level on IRB or if logger_level is present on Thread.current
-        @log_to.level = defined?(IRB) ? Logger::DEBUG : Thread.current[:logger_level] || Logger::INFO
+        log_level = defined?(IRB) ? Logger::DEBUG : Thread.current[:logger_level] || Logger::INFO
+        @log_to.level = log_level
       end
     end
   end

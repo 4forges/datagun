@@ -4,11 +4,11 @@ require 'rails/generators'
 
 # Creates the Datagun initializer file for Rails apps.
 #
-# @example Invokation from terminal
+# @example Invocation from terminal
 #   rails generate datagun
 #
 class DatagunGenerator < Rails::Generators::Base
-  desc "Description:\n  This creates a Rails initializer for Datagun"
+  desc "Description:\n This creates a Rails initializer for Datagun"
 
   source_root File.expand_path('templates', __dir__)
 

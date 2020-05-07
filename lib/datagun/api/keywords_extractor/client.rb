@@ -3,11 +3,11 @@
 module Datagun
   module Api
     #
-    # Base class for Datagun
+    # KeywordsExtractor class for Datagun
     #
     module KeywordsExtractor
       #
-      # Client provides methods to interact with keywords_extractor endpoint
+      # Client provides methods to interact with keywords_extractor endpoints
       #
       class Client < Base
         def initialize(default_logger: nil, version: Datagun.config.api_version)

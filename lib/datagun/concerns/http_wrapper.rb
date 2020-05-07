@@ -3,7 +3,7 @@
 require 'rest-client'
 require 'json'
 #
-# Decorator class for the RestClient, mainly used to add the headers with authorization
+# Decorator class for RestClient, mainly used to add the authorization headers
 #
 class HttpWrapper
   attr_accessor :payload
@@ -17,22 +17,33 @@ class HttpWrapper
   end
 
   def post
-    JSON.parse(RestClient.post(url, payload, @headers).body)['data']
+    res = RestClient.post(url, payload, @headers)
+    JSON.parse(res.body)['data']
   rescue StandardError => e
     { error: e.message }
   end
 
   def get
-    JSON.parse(RestClient.get(url, { Authorization: Datagun.config.api_key, params: payload }).body)['data']
+    res = RestClient.get(
+      url,
+      {
+        Authorization: Datagun.config.api_key,
+        params: payload
+      }
+    )
+    JSON.parse(res.body)['data']
   rescue StandardError => e
     { error: e.message }
   end
 
   def delete
-    JSON.parse(RestClient.delete(url, { Authorization: Datagun.config.api_key }).body)['data']
+    res = RestClient.delete(url, { Authorization: Datagun.config.api_key })
+    JSON.parse(res.body)['data']
   rescue StandardError => e
     { error: e.message }
   end
+
+  private
 
   def url
     "#{@base_url}/#{@endpoint}"

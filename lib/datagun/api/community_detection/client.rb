@@ -10,6 +10,9 @@ module Datagun
       # Client provide an HttpWrapper object that let
       #
       class Client < Datagun::Base
+        #
+        # Client provides methods to interact with community_detection endpoints
+        #
         def initialize(default_logger: nil, version: Datagun.config.api_version)
           super(default_logger: default_logger, version: version)
           base_url = "#{@api_url}/api/#{@version}/community_detection"
@@ -21,7 +24,7 @@ module Datagun
           client.payload = {
             graph: graph
           }
-          client.post.map{transform_keys(&:to_sym)
+          client.post.map { |item| item.transform_keys(&:to_sym) }
         end
       end
     end

@@ -3,11 +3,11 @@
 module Datagun
   module Api
     #
-    # Base class for Datagun
+    # ImageHash class for Datagun
     #
     module ImageHash
       #
-      # Client provide an HttpWrapper object that let
+      # Client provides methods to interact with image_hash endpoints
       #
       class Client < Datagun::Base
         def initialize(default_logger: nil, version: Datagun.config.api_version)
