@@ -24,7 +24,8 @@ module Datagun
           client.payload = {
             graph: graph
           }
-          client.post.map { |item| item.transform_keys(&:to_sym) }
+          res = client.post
+          res[:error].present? ? res : res.map { |item| item.transform_keys(&:to_sym) }
         end
       end
     end

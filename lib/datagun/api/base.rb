@@ -16,7 +16,7 @@ module Datagun
       #
       def initialize(default_logger: nil, version:)
         @logger = default_logger || self.class.set_logger
-        @api_url = Datagun.config.api_url || 'https://api.datagun.ai'
+        @api_url = Datagun.config.api_url || 'http://api.datagun.ai'
         @version = version
       end
 

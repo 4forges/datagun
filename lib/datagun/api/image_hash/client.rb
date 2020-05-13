@@ -21,7 +21,8 @@ module Datagun
           client.payload = {
             url: url
           }
-          client.get.transform_keys(&:to_sym)
+          res = client.get
+          res[:error].present? ? res : res.transform_keys(&:to_sym)
         end
       end
     end
