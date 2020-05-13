@@ -25,7 +25,7 @@ module Datagun
             graph: graph
           }
           res = client.post
-          res[:error].present? ? res : res.map { |item| item.transform_keys(&:to_sym) }
+          res.is_a?(Hash) && res[:error].present? ? res : res.map { |item| item.transform_keys(&:to_sym) }
         end
       end
     end
