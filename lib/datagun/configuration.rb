@@ -21,8 +21,6 @@ module Datagun
     # Initialize Datagun::Configuration
     #
     def initialize
-      @api_key = ''
-      @api_version = ''
     end
 
     MANDATORY_ATTRS.each do |attr|
