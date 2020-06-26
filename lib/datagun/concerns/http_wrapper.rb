@@ -45,7 +45,7 @@ class HttpWrapper
 
   private
 
-  def url
-    "#{@base_url}/#{@endpoint}"
-  end
+    def url
+      "#{@base_url}/#{@endpoint}"
+    end
 end
