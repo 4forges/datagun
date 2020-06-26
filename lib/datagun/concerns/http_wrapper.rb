@@ -12,7 +12,7 @@ class HttpWrapper
   def initialize(base_url:)
     @base_url = base_url
     @headers = {
-      'Authorization': Datagun.config.api_key
+      'Authorization': Datagun.configure.api_key
     }
   end
 
