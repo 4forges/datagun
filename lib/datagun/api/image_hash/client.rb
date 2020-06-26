@@ -22,7 +22,7 @@ module Datagun
             url: url
           }
           res = client.get
-          res.is_a?(Hash) && res[:error].present? ? res : res.transform_keys(&:to_sym)
+          res.is_a?(Hash) && res.has_key?(:error) ? res[:error] : res.transform_keys(&:to_sym)
         end
       end
     end
