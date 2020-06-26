@@ -12,7 +12,7 @@ module Datagun
       class Client < Base
         def initialize(default_logger: nil, version: Datagun.configure.api_version)
           super(default_logger: default_logger, version: version)
-          base_url = "#{@api_url}/api/#{@version}/image_hash"
+          base_url = "https://api.datagun.ai/api/v1/image_hash"
           @client = HttpWrapper.new(base_url: base_url)
         end
 
