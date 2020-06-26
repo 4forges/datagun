@@ -9,7 +9,7 @@ module Datagun
       #
       # Client provides methods to interact with image_hash endpoints
       #
-      class Client < Datagun::Base
+      class Client < Base
         def initialize(default_logger: nil, version: Datagun.config.api_version)
           super(default_logger: default_logger, version: version)
           base_url = "#{@api_url}/api/#{@version}/image_hash"

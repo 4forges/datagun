@@ -9,7 +9,7 @@ module Datagun
       #
       # Client provide an HttpWrapper object that let
       #
-      class Client < Datagun::Base
+      class Client < Base
         #
         # Client provides methods to interact with community_detection endpoints
         #
