@@ -16,8 +16,8 @@ module Datagun
     attr_accessor :config
 
     def configure
-      self.config = Datagun::Configuration.new
-      yield(config)
+      Datagun::Configuration.new
+      # yield(config)
     end
   end
 end

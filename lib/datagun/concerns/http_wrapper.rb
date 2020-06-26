@@ -12,7 +12,7 @@ class HttpWrapper
   def initialize(base_url:)
     @base_url = base_url
     @headers = {
-      'Authorization': Datagun.configure.api_key
+      'Authorization': Datagun.cofigure.api_key
     }
   end
 
@@ -27,7 +27,7 @@ class HttpWrapper
     res = RestClient.get(
       url,
       {
-        Authorization: Datagun.config.api_key,
+        Authorization: Datagun.cofigure.api_key,
         params: payload
       }
     )
@@ -37,7 +37,7 @@ class HttpWrapper
   end
 
   def delete
-    res = RestClient.delete(url, { Authorization: Datagun.config.api_key })
+    res = RestClient.delete(url, { Authorization: Datagun.cofigure.api_key })
     JSON.parse(res.body)['data']
   rescue StandardError => e
     { error: e.message }
