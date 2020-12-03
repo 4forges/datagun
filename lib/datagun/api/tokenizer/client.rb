@@ -19,16 +19,18 @@ module Datagun
           @client = HttpWrapper.new(base_url: base_url)
         end
 
-        def tokenize(text:, language: nil, downcase:, remove_stopwords:)
+        def tokenize(downcase:, language: nil, minimum_length: 1, remove_emoji: false, remove_stopwords: false, text:)
           client.endpoint = 'tokenize'
           client.payload = {
-            text: text,
-            language: language,
             downcase: downcase,
-            remove_stopwords: remove_stopwords
+            language: language,
+            minimum_length: minimum_length,
+            remove_emoji: remove_emoji,
+            remove_stopwords: remove_stopwords,
+            text: text
           }
           res = client.post
-          res.is_a?(Hash) && res[:error].present? ? res : res.map { |item| item.transform_keys(&:to_sym) }
+          res.deep_symbolize_keys
         end
       end
     end

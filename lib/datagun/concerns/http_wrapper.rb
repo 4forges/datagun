@@ -19,6 +19,8 @@ class HttpWrapper
   def post
     res = RestClient.post(url, payload, @headers)
     JSON.parse(res.body)['data']
+  rescue RestClient::ExceptionWithResponse => e
+    JSON.parse(e.response)['data']
   rescue StandardError => e
     { error: e.message }
   end
@@ -32,6 +34,8 @@ class HttpWrapper
       }
     )
     JSON.parse(res.body)['data']
+  rescue RestClient::ExceptionWithResponse => e
+    JSON.parse(e.response)['data']
   rescue StandardError => e
     { error: e.message }
   end
@@ -45,7 +49,7 @@ class HttpWrapper
 
   private
 
-    def url
-      "#{@base_url}/#{@endpoint}"
-    end
+  def url
+    "#{@base_url}/#{@endpoint}"
+  end
 end

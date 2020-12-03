@@ -21,7 +21,6 @@ Gem::Specification.new do |spec|
   spec.metadata['changelog_uri'] = 'https://github.com/4forges/datagun/blob/master/CHANGELOG.md'
   spec.post_install_message = '
     To enable datagun api please run
-
     rails g datagun
   '
   # Specify which files should be added to the gem when it is released.
