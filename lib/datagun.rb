@@ -11,6 +11,7 @@ require 'datagun/api/community_detection/client'
 require 'datagun/api/image_hash/client'
 require 'datagun/api/keywords_extractor/client'
 require 'datagun/api/tokenizer/client'
+require 'datagun/api/entities/client'
 
 module Datagun
   class Error < StandardError; end
