@@ -11,7 +11,7 @@ module Datagun
       #
       class Client < Base
         #
-        # Client provides methods to interact with tokenizer endpoint
+        # Client provides methods to interact with ner endpoint
         #
         def initialize(default_logger: nil, version: Datagun.config.api_version)
           super(default_logger: default_logger, version: version)
